@@ -1,0 +1,50 @@
+name: Help
+main: com.ipwnage.ipahelp.Help
+author: [Drew1895, Protocol_7]
+version: 1.0
+commands:
+  help:
+      description: Used to control the PlaytimeRewards plugin.
+      usage: /help
+     
+ 
+permissions:
+    ipwnage.help.normal:
+        description: Allows players to earn money for play time.
+        default: false
+    ipwnage.help.commoner:
+        description: Allows players to earn money at a higher rate.
+        default: false
+    ipwnage.help.dcommoner:
+        description: Allows players to reload the configuration and update the configuration. You should only give this to staff members.
+        default: false
+    ipwnage.help.trusted:
+        description: Allows players to reload the configuration and update the configuration. You should only give this to staff members.
+        default: false
+    ipwnage.help.dtrusted:
+        description: Allows players to reload the configuration and update the configuration. You should only give this to staff members.
+        default: false
+    ipwnage.help.veteran:
+        description: Allows players to reload the configuration and update the configuration. You should only give this to staff members.
+        default: false
+    ipwnage.help.dveteran:
+        description: Allows players to reload the configuration and update the configuration. You should only give this to staff members.
+        default: false
+    ipwnage.help.senior:
+        description: Allows players to reload the configuration and update the configuration. You should only give this to staff members.
+        default: false
+    ipwnage.help.dsenior:
+        description: Allows players to reload the configuration and update the configuration. You should only give this to staff members.
+        default: false
+    ipwnage.help.elder:
+        description: Allows players to reload the configuration and update the configuration. You should only give this to staff members.
+        default: false
+    ipwnage.help.delder:
+        description: Allows players to reload the configuration and update the configuration. You should only give this to staff members.
+        default: false
+    ipwnage.help.architect:
+        description: Allows players to reload the configuration and update the configuration. You should only give this to staff members.
+        default: false
+    ipwnage.help.tribune:
+        description: Allows players to reload the configuration and update the configuration. You should only give this to staff members.
+        default: false

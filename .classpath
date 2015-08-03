@@ -3,5 +3,6 @@
 	<classpathentry kind="src" path="src"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
 	<classpathentry kind="lib" path="/Users/andrew/Work/lib/Spigot API/spigot-api-1.8.8-R0.1-SNAPSHOT-shaded.jar"/>
+	<classpathentry kind="lib" path="/Users/andrew/Downloads/fanciful-0.3.3-SNAPSHOT.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
