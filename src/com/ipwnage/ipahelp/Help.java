@@ -10,8 +10,6 @@ public class Help extends JavaPlugin {
 	
 	
 	public void onEnable(){
-		log.info("The boys are back at it again!");
-		
 		getCommand("help").setExecutor(new HelpCommand(this));
 	}
 	
