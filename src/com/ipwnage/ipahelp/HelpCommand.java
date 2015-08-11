@@ -6,7 +6,6 @@ import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
-import mkremins.fanciful.FancyMessage;
 import net.md_5.bungee.api.ChatColor;
 import net.md_5.bungee.api.chat.ClickEvent;
 import net.md_5.bungee.api.chat.ComponentBuilder;
@@ -38,9 +37,6 @@ public class HelpCommand implements CommandExecutor {
 	TextComponent misc = new TextComponent("Miscellaneous");
 	
 	
-	
-	
-	// I'll work on this later.   TextComponent doors = new TextComponent("Locking doors and chests");
 	TextComponent regioning = new TextComponent("Claiming Land");
 	
 	TextComponent warps = new TextComponent("Warps");
@@ -98,7 +94,7 @@ public class HelpCommand implements CommandExecutor {
 		if(command.getName().equalsIgnoreCase("help")){
 			
 			if(!(sender instanceof Player)){
-				sender.sendMessage("Hey, lohle, you have to be a player to run this shit!");
+				sender.sendMessage("You've got to be a player to run this command!");
 			}
 			
 			
@@ -174,17 +170,22 @@ public class HelpCommand implements CommandExecutor {
 	private void tp(Player p){
 		TextComponent tpa = new TextComponent("Tpa   ");
 		TextComponent tp = new TextComponent("Tp   ");
+		TextComponent home = new TextComponent("Home   ");
 		TextComponent warp = new TextComponent("Warp");
 	
 		tpa.setColor(ChatColor.GOLD);
 		tp.setColor(ChatColor.GOLD);
 		warp.setColor(ChatColor.GOLD);
+		home.setColor(ChatColor.GOLD);
+		
+		home.setHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT, new ComponentBuilder("Go to your home").create()));
+		home.setClickEvent(new ClickEvent(ClickEvent.Action.RUN_COMMAND, "/home"));
 		
 		if(p.hasPermission(normal) || p.hasPermission(commoner) || p.hasPermission(dcommoner)){
 			
 			TextComponent normie = new TextComponent("As a newer player, you can only use /tpa, and /warp. You'll gain more commands as you rankup. Click on a command, below, to learn how to use it.");
 			
-			normie.setColor(ChatColor.AQUA);
+			normie.setColor(ChatColor.GRAY);
 			
 			tpa.setHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT, new ComponentBuilder("Teleport to other players, with thier permission.").create()));
 			tpa.setClickEvent(new ClickEvent(ClickEvent.Action.RUN_COMMAND, "/tpa"));
@@ -194,7 +195,7 @@ public class HelpCommand implements CommandExecutor {
 			warp.setClickEvent(new ClickEvent(ClickEvent.Action.RUN_COMMAND, "/warp"));
 			
 			p.spigot().sendMessage(normie);
-			p.spigot().sendMessage(tpa, warp);
+			p.spigot().sendMessage(tpa, home, warp);
 			
 			
 			
@@ -209,7 +210,7 @@ public class HelpCommand implements CommandExecutor {
 			
 			TextComponent tphere = new TextComponent("Tphere   ");
 			
-			nonNormie.setColor(ChatColor.AQUA);
+			nonNormie.setColor(ChatColor.GRAY);
 			dontSpam.setColor(ChatColor.RED);
 			
 			tphere.setColor(ChatColor.GOLD);
@@ -227,7 +228,7 @@ public class HelpCommand implements CommandExecutor {
 			p.spigot().sendMessage(nonNormie);
 			p.spigot().sendMessage(dontSpam);
 			
-			p.spigot().sendMessage(tp, tphere, warp);
+			p.spigot().sendMessage(tp, tphere, home, warp);
 			
 		}
 		
@@ -240,6 +241,32 @@ public class HelpCommand implements CommandExecutor {
 	
 	private void creative(Player p){
 		
+		TextComponent items = new TextComponent("Item spawning");
+		TextComponent worldedit = new TextComponent("Worldedit");
+		
+		worldedit.setColor(ChatColor.GOLD);
+		items.setColor(ChatColor.GOLD);
+		
+		if(p.hasPermission(normal) || p.hasPermission(commoner) || p.hasPermission(dcommoner) || p.hasPermission(trusted) || p.hasPermission(dtrusted) || p.hasPermission(vet)){
+			items.setHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT, new ComponentBuilder("Item spawning is unlocked at senior+").create()));
+			p.spigot().sendMessage(items);
+		}else{
+			items.setHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT, new ComponentBuilder("Spawn any item").create()));
+			items.setClickEvent(new ClickEvent(ClickEvent.Action.RUN_COMMAND, "/i"));
+			TextComponent noSpawnPls = new TextComponent("Spawning items for new players will result in a ban.");
+			noSpawnPls.setColor(ChatColor.RED);
+			p.spigot().sendMessage(noSpawnPls);
+			p.spigot().sendMessage(items);
+		}
+		
+		
+		if(p.hasPermission(trib) || p.hasPermission(arch)){
+			worldedit.setHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT, new ComponentBuilder("You should already know how to use worldedit.").create()));
+			p.spigot().sendMessage(worldedit);
+		}else{
+			worldedit.setHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT, new ComponentBuilder("Worldedit is unlocked at tribune, and architect").create()));
+			p.spigot().sendMessage(worldedit);
+		}
 		
 	}
 	
@@ -265,6 +292,8 @@ public class HelpCommand implements CommandExecutor {
 	}
 	
 	private void misc(Player p){
+		
+		miscMessage.setColor(ChatColor.AQUA);
 		
 		p.spigot().sendMessage(miscMessage);
 		
