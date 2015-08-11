@@ -38,9 +38,9 @@ public class HelpCommand implements CommandExecutor {
 	TextComponent misc = new TextComponent("Miscellaneous");
 	
 	
-	TextComponent subtopic = new TextComponent("Click on a sub-topic to learn more about it");
 	
-	TextComponent doors = new TextComponent("Locking doors and chests");
+	
+	// I'll work on this later.   TextComponent doors = new TextComponent("Locking doors and chests");
 	TextComponent regioning = new TextComponent("Claiming Land");
 	
 	TextComponent warps = new TextComponent("Warps");
@@ -96,6 +96,12 @@ public class HelpCommand implements CommandExecutor {
 	public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
 		Player player = (Player) sender;
 		if(command.getName().equalsIgnoreCase("help")){
+			
+			if(!(sender instanceof Player)){
+				sender.sendMessage("Hey, lohle, you have to be a player to run this shit!");
+			}
+			
+			
 			if(args.length < 1){
 				baseCommand(sender);
 				return true;
@@ -139,16 +145,94 @@ public class HelpCommand implements CommandExecutor {
 	
 	private void landProtection(Player p){
 		
-		subtopic.setColor(ChatColor.GOLD);
-		
 		if(p.hasPermission(normal)){
-			p.sendMessage("As a normal, you cannot protect land. Ask in chat for someone to protect it for you, or ask staff!");
+			p.sendMessage(ChatColor.RED + "As a normal, you cannot protect land. Ask in chat for someone to protect it for you, or ask staff!");
+		}
+		
+		if(p.hasPermission(commoner) || p.hasPermission(dcommoner) || p.hasPermission(trusted) || p.hasPermission(dtrusted)){
+			
+			TextComponent learnRegioning = new TextComponent("The 'region' command lets you protect your land from grief! The syntax is /region claim <regionName>. Make sure you set the points first with  //wand!");
+			TextComponent idkHowToWand = new TextComponent("Don't know how to use the worldedit wand? No problem! Click on ");
+			TextComponent thisLink = new TextComponent("this link!");
+			
+			learnRegioning.setColor(ChatColor.GOLD);
+			
+			idkHowToWand.setColor(ChatColor.GRAY);
+			thisLink.setClickEvent(new ClickEvent(ClickEvent.Action.OPEN_URL, "http://wiki.sk89q.com/wiki/WorldEdit/Selection#Selecting_cuboids"));
+			thisLink.setColor(ChatColor.BLUE);
+			idkHowToWand.addExtra(thisLink);
+			
+			p.spigot().sendMessage(learnRegioning);
+			p.spigot().sendMessage(idkHowToWand);
+		}else{
+			p.sendMessage(ChatColor.RED + "You should already know how to region land by now.");
 		}
 		
 		
 	}
 	
 	private void tp(Player p){
+		TextComponent tpa = new TextComponent("Tpa   ");
+		TextComponent tp = new TextComponent("Tp   ");
+		TextComponent warp = new TextComponent("Warp");
+	
+		tpa.setColor(ChatColor.GOLD);
+		tp.setColor(ChatColor.GOLD);
+		warp.setColor(ChatColor.GOLD);
+		
+		if(p.hasPermission(normal) || p.hasPermission(commoner) || p.hasPermission(dcommoner)){
+			
+			TextComponent normie = new TextComponent("As a newer player, you can only use /tpa, and /warp. You'll gain more commands as you rankup. Click on a command, below, to learn how to use it.");
+			
+			normie.setColor(ChatColor.AQUA);
+			
+			tpa.setHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT, new ComponentBuilder("Teleport to other players, with thier permission.").create()));
+			tpa.setClickEvent(new ClickEvent(ClickEvent.Action.RUN_COMMAND, "/tpa"));
+			
+			warp.setHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT, new ComponentBuilder("Warp to player-created warps around the server!").create()));
+			warp.setClickEvent(new ClickEvent(ClickEvent.Action.SUGGEST_COMMAND, "/warp list"));
+			warp.setClickEvent(new ClickEvent(ClickEvent.Action.RUN_COMMAND, "/warp"));
+			
+			p.spigot().sendMessage(normie);
+			p.spigot().sendMessage(tpa, warp);
+			
+			
+			
+			
+			
+		}
+		
+		if(p.hasPermission(vet) || p.hasPermission(dvet) || p.hasPermission(senior) || p.hasPermission(dsenior) || p.hasPermission(elder) || p.hasPermission(delder) || p.hasPermission(arch) || p.hasPermission(trib)){
+			
+			TextComponent nonNormie = new TextComponent("As a seasoned player, you have access to commands like /warp /tphere, and /tp.");
+			TextComponent dontSpam = new TextComponent("However, spamming /tphere on someone, and tping to staff without thier explicit permission is a punishable offense!");
+			
+			TextComponent tphere = new TextComponent("Tphere   ");
+			
+			nonNormie.setColor(ChatColor.AQUA);
+			dontSpam.setColor(ChatColor.RED);
+			
+			tphere.setColor(ChatColor.GOLD);
+			tphere.setHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT, new ComponentBuilder("Teleport another player to you.").create()));
+			tphere.setClickEvent(new ClickEvent(ClickEvent.Action.RUN_COMMAND, "/tphere"));
+			
+			warp.setHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT, new ComponentBuilder("Warp to player-created warps around the server!").create()));
+			warp.setClickEvent(new ClickEvent(ClickEvent.Action.SUGGEST_COMMAND, "/warp list"));
+			warp.setClickEvent(new ClickEvent(ClickEvent.Action.RUN_COMMAND, "/warp"));
+			
+			tp.setHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT, new ComponentBuilder("Teleport to other players").create()));
+			tp.setClickEvent(new ClickEvent(ClickEvent.Action.RUN_COMMAND, "/tp"));
+			
+			
+			p.spigot().sendMessage(nonNormie);
+			p.spigot().sendMessage(dontSpam);
+			
+			p.spigot().sendMessage(tp, tphere, warp);
+			
+		}
+		
+		
+		
 		
 		
 		
