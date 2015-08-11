@@ -1,4 +1,5 @@
 # iPwnAge-Help
+Replaces the current help plugin on the iPwnAge server.
 #Commands
 
 /help - 
