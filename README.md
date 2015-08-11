@@ -1,6 +1,4 @@
 # iPwnAge-Help
---
-
 #Commands
 
 /help - 
