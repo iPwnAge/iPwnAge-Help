@@ -36,14 +36,6 @@ public class HelpCommand implements CommandExecutor {
 	TextComponent econ = new TextComponent("Economy");
 	TextComponent misc = new TextComponent("Miscellaneous");
 
-
-	TextComponent regioning = new TextComponent("Claiming Land");
-
-	TextComponent warps = new TextComponent("Warps");
-	TextComponent tpa = new TextComponent("Teleporting to others");
-
-	TextComponent kitsOrItems = new TextComponent("Kits/Spawning Items");
-	TextComponent economy =  new TextComponent("The Economy");
 	TextComponent miscMessage = new TextComponent("Oh no! This section seems to be missing");
 
 	Help help;
