@@ -262,11 +262,16 @@ public class HelpCommand implements CommandExecutor {
 
 		if(p.hasPermission(normal) ||  p.hasPermission(commoner) || p.hasPermission(dcommoner) || p.hasPermission(trusted) || p.hasPermission(dtrusted) || p.hasPermission(vet)){
 			TextComponent shopsAtSpawn = new TextComponent("Visit the various npc's at spawn to use the economy!");
+			TextComponent alsoKitsAreNice = new TextComponent("Alternatively, you can use the provided kits to get started!");
+			alsoKitsAreNice.setHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT, new ComponentBuilder("Click to learn what kits are available").create()));
+			alsoKitsAreNice.setClickEvent(new ClickEvent(ClickEvent.Action.RUN_COMMAND, "/kit"));
+			alsoKitsAreNice.setColor(ChatColor.GRAY);
 			shopsAtSpawn.setColor(ChatColor.GRAY);
 			shopsAtSpawn.setHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT, new ComponentBuilder("Click to visit spawn").create()));
 			shopsAtSpawn.setClickEvent(new ClickEvent(ClickEvent.Action.RUN_COMMAND, "/spawn"));
 
 			p.spigot().sendMessage(shopsAtSpawn);
+			p.spigot().sendMessage(alsoKitsAreNice);
 		}else{
 			TextComponent justSpawnTheFuckingItem = new TextComponent("At your rank, you cannot use the economy! Use /i to get the desired item.");
 			TextComponent plsNoSpawning =  new TextComponent("However, giving spawned items to newer players is a bannable offense!");

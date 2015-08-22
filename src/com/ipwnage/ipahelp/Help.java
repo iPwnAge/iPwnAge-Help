@@ -10,6 +10,9 @@ public class Help extends JavaPlugin {
 	
 	
 	public void onEnable(){
+		
+		log.info(String.format("[%s] Enabling version %s", getDescription().getName(), getDescription().getVersion()));
+		
 		getCommand("help").setExecutor(new HelpCommand(this));
 	}
 	
